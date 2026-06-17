@@ -768,15 +768,15 @@ async function submitOrder(){
 
   const now = new Date();
   const timestamp = `${now.getDate().toString().padStart(2,'0')}/${(now.getMonth()+1).toString().padStart(2,'0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
-  const payload = {timestamp,name,phone,customerType,items:cart.map(l=>({name:l.name,size:l.size,price:l.price,qty:l.qty}))};
-
+  const orderId = 'DH' + Date.now().toString().slice(-8); // Tạo 1 lần duy nhất ở đây
+  const payload = {orderId,timestamp,name,phone,customerType,items:cart.map(l=>({name:l.name,size:l.size,price:l.price,qty:l.qty}))};
   try{
     await fetch(APPS_SCRIPT_URL,{
       method:'POST',mode:'no-cors',
       headers:{'Content-Type':'text/plain;charset=utf-8'},
       body:JSON.stringify(payload)
     });
-    showSuccess(name);
+    showSuccess(name, orderId);
     cart = [];
     renderCart();
     renderCatalog();
@@ -787,8 +787,7 @@ async function submitOrder(){
   }
 }
 
-function showSuccess(name){
-  const code = 'DH'+Date.now().toString().slice(-6);
+function showSuccess(name, code){
   const modal = document.getElementById('modalContent');
   modal.innerHTML = `
     <div class="success-seal">✓</div>
