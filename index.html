@@ -449,12 +449,28 @@ footer strong{color:rgba(255,255,255,0.9);}
 
 <div class="toast" id="toast"></div>
 
-<footer>
-  Trung tâm Đào tạo, Nghiên cứu và Tư vấn Kinh tế (CENTREC) — <strong>Đại học Cần Thơ</strong><br>
-  Mọi đơn hàng được ghi nhận và xử lý trực tiếp bởi cửa hàng.<br>
-  Địa chỉ: Tầng trệt Trung tâm học liệu, Khu II, Đại học Cần Thơ, đường 3/2, P. Ninh Kiều, TP Cần Thơ.
-  Email: Centrec@ctu.edu.vn
-  Zalo: 0837 340 452
+<footer style="padding:20px 0;">
+    <table width="100%">
+        <tr>
+            <td style="font-size:14px; line-height:1.6;">
+                Trung tâm Đào tạo, Nghiên cứu và Tư vấn Kinh tế (CENTREC) —
+                <strong>Đại học Cần Thơ</strong><br>
+
+                Mọi đơn hàng được ghi nhận và xử lý trực tiếp bởi cửa hàng.<br>
+
+                Địa chỉ: Tầng trệt Trung tâm học liệu, Khu II, Đại học Cần Thơ,
+                đường 3/2, P. Ninh Kiều, TP Cần Thơ.<br>
+
+                Email: Centrec@ctu.edu.vn<br>
+                Zalo: 0837 340 452
+            </td>
+
+            <td width="130" align="center">
+                <img src="qr.png" alt="QR Code"
+                     style="width:100px; height:auto;">
+            </td>
+        </tr>
+    </table>
 </footer>
 
 <script>
@@ -485,7 +501,7 @@ const PRODUCTS = [
   {id:'doan_275',name:'Áo Đoàn thanh niên cao cấp',cat:'dongphuc',price:275000,sizes:['S','M','L','XL','2XL','3XL'],img:'doan_275.png',abbr:'ĐTN'},
   {id:'ctu_99',name:'Áo đồng phục sinh viên CTU ',cat:'dongphuc',price:99000,sizes:['S','M','L','XL','2XL','3XL','4XL','5XL'],img:'ctu_99.png',abbr:'CTU',tag:'Giá tốt'},
   {id:'ctu_75',name:'Áo đồng phục thể dục CTU ',cat:'dongphuc',price:75000,sizes:['2','3','4','5','6','7','8','9'],img:'ctu_75.png',abbr:'TD'},
-  {id:'quan_ctu',name:'Quần CTU ',cat:'cse',price:100000,sizes:['7','8','9','10','11','12','13','14'],img:'quan_ctu.png',abbr:'QK'},
+  {id:'quan_ctu',name:'Quần CTU ',cat:'dongphuc',price:120000,sizes:['7','8','9','10','11','12','13','14'],img:'quan_ctu.png',abbr:'QK'},
 
   {id:'mockhoa_ctu',name:'Móc khóa CTU',cat:'luuniem',price:15000,sizes:['Thoi','Gấu'],img:'mockhoa_ctu.png',abbr:'MK'},
   {id:'tuivai_19',name:'Túi vải CTU ',cat:'luuniem',price:19000,sizes:null,img:'tuivai_19.png',abbr:'TV'},
