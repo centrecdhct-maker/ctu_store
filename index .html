@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTU Store — Đồng phục &amp; Quà lưu niệm</title>
+<link rel="icon" type="image/png" href="logo_ctu.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d1f3c;
+  --paper:#f0f5fb;
+  --paper-2:#dde8f5;
+  --card:#f8fbff;
+  --green:#1f5ca9;
+  --green-deep:#153f7a;
+  --green-soft:#d6e8f8;
+  --terracotta:#00afef;
+  --terracotta-deep:#0086c3;
+  --terracotta-soft:#c8ecfb;
+  --line:#b8d0e8;
+  --muted:#4a6585;
+  --gold:#2e8fcf;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  letter-spacing:-0.01em;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+::selection{background:var(--terracotta-soft);}
+
+/* ===== Top bar ===== */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:var(--green);
+  color:#fff;
+  border-bottom:1px solid var(--green-deep);
+}
+.topbar-inner{
+  max-width:1180px;margin:0 auto;
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{
+  display:flex;align-items:center;gap:12px;
+}
+.seal{
+  width:42px;height:42px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.55);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-weight:700;font-size:13px;
+  letter-spacing:0.02em;
+  flex-shrink:0;
+}
+.brand-text h1{
+  font-size:19px;color:#fff;margin:0;line-height:1.1;
+}
+.brand-text p{
+  margin:1px 0 0;font-size:11.5px;color:rgba(255,255,255,0.7);
+  letter-spacing:0.03em;text-transform:uppercase;
+}
+.topbar-actions{display:flex;align-items:center;gap:10px;}
+.cart-btn{
+  background:var(--terracotta);
+  color:#fff;border:none;border-radius:999px;
+  padding:10px 18px 10px 16px;
+  font-size:14px;font-weight:600;
+  display:flex;align-items:center;gap:8px;
+  cursor:pointer;transition:background .15s ease;
+}
+.cart-btn:hover{background:var(--terracotta-deep);}
+.cart-count{
+  background:#fff;color:var(--terracotta-deep);
+  border-radius:999px;min-width:20px;height:20px;
+  font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 5px;
+}
+
+/* ===== Hero ===== */
+.hero{
+  max-width:1180px;margin:0 auto;
+  padding:48px 24px 32px;
+  display:grid;grid-template-columns:1.3fr 1fr;gap:40px;
+  align-items:center;
+}
+.hero-eyebrow{
+  font-size:12px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--terracotta-deep);font-weight:600;margin:0 0 14px;
+}
+.hero h2{
+  font-size:42px;line-height:1.08;color:var(--green-deep);
+  margin:0 0 16px;
+}
+.hero h2 em{
+  font-style:italic;color:var(--terracotta);
+}
+.hero p{
+  font-size:16px;line-height:1.6;color:var(--muted);
+  max-width:460px;margin:0 0 22px;
+}
+.hero-stats{display:flex;gap:28px;}
+.hero-stat .num{font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:var(--green-deep);}
+.hero-stat .label{font-size:12.5px;color:var(--muted);margin-top:2px;}
+.hero-art{
+  background:var(--green-soft);
+  border:1px solid var(--line);
+  border-radius:18px;
+  height:280px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-art .ring{
+  width:170px;height:170px;border-radius:50%;
+  border:1.5px dashed var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+}
+.hero-art .ring-inner{
+  font-family:'Fraunces',serif;font-size:15px;font-weight:600;
+  color:var(--green-deep);line-height:1.3;padding:0 14px;
+}
+.hero-art .ring-inner small{
+  display:block;font-family:'Inter',sans-serif;font-weight:600;
+  font-size:10.5px;letter-spacing:0.1em;color:var(--terracotta-deep);
+  margin-top:6px;
+}
+
+/* ===== Filter bar ===== */
+.filter-wrap{
+  max-width:1180px;margin:0 auto;padding:0 24px;
+  position:sticky;top:70px;z-index:30;
+}
+.filter-bar{
+  background:var(--paper);
+  display:flex;gap:8px;overflow-x:auto;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  scrollbar-width:none;
+}
+.filter-bar::-webkit-scrollbar{display:none;}
+.chip{
+  flex-shrink:0;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  border-radius:999px;
+  padding:9px 16px;
+  font-size:13.5px;font-weight:500;
+  cursor:pointer;white-space:nowrap;
+  transition:all .15s ease;
+}
+.chip:hover{border-color:var(--green);}
+.chip.active{
+  background:var(--green);border-color:var(--green);color:#fff;
+}
+
+/* ===== Product grid ===== */
+.catalog{max-width:1180px;margin:0 auto;padding:28px 24px 80px;}
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:36px 0 16px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h3{font-size:22px;color:var(--green-deep);margin:0;}
+.section-head .count{font-size:13px;color:var(--muted);}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
+}
+.product-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .15s ease,transform .15s ease;
+}
+.product-card:hover{border-color:var(--green);transform:translateY(-2px);}
+.product-media{
+  height:180px;background:var(--green-soft);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.product-media img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transition:transform .3s ease;
+}
+.product-card:hover .product-media img{transform:scale(1.04);}
+.product-media .img-fallback{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+}
+.product-media .tag{
+  position:absolute;top:10px;left:10px;
+  background:var(--terracotta);color:#fff;
+  font-size:10.5px;font-weight:700;letter-spacing:0.04em;
+  padding:4px 9px;border-radius:6px;text-transform:uppercase;
+}
+.product-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.product-name{font-size:14.5px;font-weight:600;line-height:1.3;margin:0;color:var(--ink);}
+.product-price{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--terracotta-deep);}
+.size-row{display:flex;flex-wrap:wrap;gap:6px;}
+.size-pill{
+  border:1px solid var(--line);background:var(--paper);
+  border-radius:7px;padding:5px 9px;font-size:12.5px;font-weight:600;
+  cursor:pointer;color:var(--ink);transition:all .12s ease;
+}
+.size-pill:hover{border-color:var(--green);}
+.size-pill.selected{background:var(--green);border-color:var(--green);color:#fff;}
+.add-btn{
+  margin-top:auto;
+  background:var(--green);color:#fff;border:none;
+  border-radius:8px;padding:9px 0;font-size:13.5px;font-weight:600;
+  cursor:pointer;transition:background .15s ease;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.add-btn:hover{background:var(--green-deep);}
+.add-btn:disabled{background:var(--line);color:var(--muted);cursor:not-allowed;}
+.add-btn.added{background:var(--terracotta);}
+.qty-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.qty-control{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;}
+.qty-control button{
+  width:28px;height:28px;border:none;background:none;font-size:15px;
+  cursor:pointer;color:var(--green-deep);font-weight:700;
+}
+.qty-control span{min-width:22px;text-align:center;font-size:13.5px;font-weight:600;}
+
+/* ===== Cart drawer ===== */
+.overlay{
+  position:fixed;inset:0;background:rgba(13,31,60,0.42);
+  z-index:50;opacity:0;visibility:hidden;transition:opacity .2s ease;
+}
+.overlay.open{opacity:1;visibility:visible;}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);
+  background:var(--paper);z-index:51;
+  display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .25s ease;
+  box-shadow:-8px 0 24px rgba(0,0,0,0.12);
+}
+.drawer.open{transform:translateX(0);}
+.drawer-head{
+  padding:20px 22px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--card);
+}
+.drawer-head h3{font-size:19px;margin:0;color:var(--green-deep);}
+.drawer-close{
+  background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);
+  width:32px;height:32px;border-radius:50%;
+}
+.drawer-close:hover{background:var(--paper-2);}
+.drawer-body{flex:1;overflow-y:auto;padding:18px 22px;}
+.drawer-empty{
+  text-align:center;padding:60px 20px;color:var(--muted);
+}
+.drawer-empty .ic{font-size:38px;margin-bottom:10px;}
+.cart-line{
+  display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);
+}
+.cart-line-media{
+  width:48px;height:48px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;background:var(--green-soft);
+}
+.cart-line-media img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
+.cart-line-info{flex:1;min-width:0;}
+.cart-line-name{font-size:13.5px;font-weight:600;margin:0 0 2px;}
+.cart-line-meta{font-size:12px;color:var(--muted);margin:0;}
+.cart-line-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.cart-line-price{font-size:13.5px;font-weight:600;color:var(--terracotta-deep);}
+.remove-link{font-size:11.5px;color:var(--muted);cursor:pointer;border:none;background:none;padding:0;}
+.remove-link:hover{color:var(--terracotta-deep);}
+
+.drawer-foot{
+  border-top:1px solid var(--line);padding:18px 22px 22px;
+  background:var(--card);
+}
+.foot-row{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);margin-bottom:6px;}
+.foot-total{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin:10px 0 16px;
+}
+.foot-total .label{font-size:14px;font-weight:600;}
+.foot-total .amount{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--terracotta-deep);}
+.checkout-btn{
+  width:100%;background:var(--terracotta);color:#fff;border:none;
+  border-radius:10px;padding:14px 0;font-size:15px;font-weight:600;cursor:pointer;
+}
+.checkout-btn:hover{background:var(--terracotta-deep);}
+
+/* ===== Checkout modal ===== */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(13,31,60,0.5);
+  z-index:60;display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .2s ease;padding:20px;
+}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal{
+  background:var(--paper);border-radius:16px;
+  width:100%;max-width:480px;max-height:88vh;overflow-y:auto;
+  padding:28px 28px 24px;
+}
+.modal h3{font-size:21px;color:var(--green-deep);margin:0 0 4px;}
+.modal .sub{font-size:13.5px;color:var(--muted);margin:0 0 20px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.field input,.field select{
+  width:100%;border:1px solid var(--line);background:var(--card);
+  border-radius:8px;padding:10px 12px;font-size:14px;color:var(--ink);
+  font-family:inherit;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--green);}
+.modal-summary{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;margin:18px 0;font-size:13px;
+}
+.modal-summary .row{display:flex;justify-content:space-between;padding:3px 0;color:var(--muted);}
+.modal-summary .row.total{
+  border-top:1px solid var(--line);margin-top:8px;padding-top:8px;
+  font-weight:700;color:var(--ink);font-size:14.5px;
+}
+.modal-actions{display:flex;gap:10px;margin-top:18px;}
+.btn-secondary{
+  flex:1;background:none;border:1px solid var(--line);border-radius:10px;
+  padding:12px 0;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink);
+}
+.btn-secondary:hover{background:var(--paper-2);}
+.btn-primary{
+  flex:1.4;background:var(--green);color:#fff;border:none;border-radius:10px;
+  padding:12px 0;font-size:14px;font-weight:600;cursor:pointer;
+}
+.btn-primary:hover{background:var(--green-deep);}
+.btn-primary:disabled{background:var(--line);color:var(--muted);cursor:not-allowed;}
+
+/* ===== Toast ===== */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--green-deep);color:#fff;
+  padding:13px 22px;border-radius:10px;font-size:13.5px;font-weight:500;
+  z-index:80;opacity:0;transition:all .25s ease;max-width:90vw;text-align:center;
+  box-shadow:0 6px 20px rgba(0,0,0,0.18);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ===== Success state ===== */
+.success-seal{
+  width:64px;height:64px;border-radius:50%;background:var(--green-soft);
+  border:1.5px dashed var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  margin:0 auto 16px;color:var(--green);
+}
+.order-code{
+  font-family:'Fraunces',serif;font-size:20px;font-weight:600;
+  text-align:center;color:var(--terracotta-deep);letter-spacing:0.04em;margin-bottom:4px;
+}
+
+footer{
+  background:var(--green-deep);color:rgba(255,255,255,0.65);
+  padding:28px 24px;text-align:center;font-size:12.5px;
+}
+footer strong{color:rgba(255,255,255,0.9);}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:32px;}
+  .hero-art{order:-1;height:200px;}
+  .hero h2{font-size:32px;}
+  .filter-wrap{top:64px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="seal">
+        <img src="logo_ctu.png" alt="CTU" style="width:30px;height:30px;object-fit:contain;border-radius:50%;">
+      </div>
+      <div class="brand-text">
+        <h1>CTU Store</h1>
+        <p>Đồng phục &amp; quà lưu niệm</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="cart-btn" onclick="openDrawer()">
+        <i>🛍</i> Giỏ hàng <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Kỷ niệm 60 năm Đại học Cần Thơ</p>
+    <h2>Mặc niềm tự hào<br><em> Đại học Cần Thơ</em> của bạn</h2>
+    <p>Áo đồng phục và quà lưu niệm chính thức — chọn size, thêm vào giỏ, đặt hàng chỉ trong một phút.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">32+</div><div class="label">mẫu sản phẩm</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="label">nhóm danh mục</div></div>
+      <div class="hero-stat"><div class="num">60</div><div class="label">năm CTU</div></div>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="ring">
+      <div class="ring-inner">Đại học<br>Cần Thơ<small>EST. 1966</small></div>
+    </div>
+  </div>
+</div>
+
+<div class="filter-wrap">
+  <div class="filter-bar" id="filterBar"></div>
+</div>
+
+<div class="catalog" id="catalog"></div>
+
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Giỏ hàng của bạn</h3>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot">
+    <div class="foot-row"><span>Số lượng</span><span id="footQty">0 sản phẩm</span></div>
+    <div class="foot-total"><span class="label">Tạm tính</span><span class="amount" id="footTotal">0đ</span></div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()">Tiến hành đặt hàng</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  Trung tâm Đào tạo, Nghiên cứu và Tư vấn Kinh tế (CENTREC) — <strong>Đại học Cần Thơ</strong><br>
+  Mọi đơn hàng được ghi nhận và xử lý trực tiếp bởi cửa hàng.<br>
+  Địa chỉ: Tầng trệt Trung tâm học liệu, Khu II, Đại học Cần Thơ, đường 3/2, P. Ninh Kiều, TP Cần Thơ.
+  Email: Centrec@ctu.edu.vn
+  Zalo: 0837 340 452
+</footer>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTf3NqbSluxzs47s2DOAj4gv_Va9afJhySBkmHDz3vH7tikJ0HiaxV86O9gudD8PaJ8A/exec";
+
+const PRODUCTS = [
+  {id:'blouse_nam',name:'Áo Blouse Nam tay dài',cat:'somi',price:280000,sizes:['S','M','L','XL','2XL','3XL'],img:'blouse_nam.png',abbr:'BN'},
+  {id:'blouse_nu',name:'Áo Blouse Nữ tay dài',cat:'somi',price:280000,sizes:['S','M','L','XL','2XL','3XL'],img:'blouse_nu.png',abbr:'BN'},
+  {id:'somi500_nam',name:'Áo sơ mi tay dài Nam ',cat:'somi',price:500000,sizes:['S','M','L','XL','2XL','3XL'],img:'somi500_nam.png',abbr:'SM'},
+  {id:'somi500_nu',name:'Áo sơ mi tay dài Nữ ',cat:'somi',price:500000,sizes:['S','M','L','XL','2XL','3XL'],img:'somi500_nu.png',abbr:'SM'},
+  {id:'somi800_nam',name:'Áo sơ mi tay dài Nam cao cấp ',cat:'somi',price:800000,sizes:['S','M','L','XL','2XL','3XL'],img:'somi800_nam.png',abbr:'SM',tag:'Cao cấp'},
+  {id:'somi800_nu',name:'Áo sơ mi tay dài Nữ cao cấp ',cat:'somi',price:700000,sizes:['S','M','L','XL','2XL','3XL'],img:'somi800_nu.png',abbr:'SM',tag:'Cao cấp'},
+  {id:'somi_ngan_nu',name:'Áo sơ mi tay ngắn Nữ cao cấp',cat:'somi',price:650000,sizes:['S','M','L','XL','2XL','3XL'],img:'somi_ngan_nu.png',abbr:'SN',tag:'Cao cấp'},
+  {id:'somi_ngan_nam',name:'Áo sơ mi tay ngắn Nam cao cấp',cat:'somi',price:750000,sizes:['S','M','L','XL','2XL','3XL'],img:'somi_ngan_nam.png',abbr:'SN',tag:'Cao cấp'},
+  {id:'cavat_nam',name:'Cà vạt Nam',cat:'somi',price:400000,sizes:null,img:'cavat_nam.png',abbr:'CV'},
+  {id:'cavat_nu',name:'Cà vạt Nữ',cat:'somi',price:400000,sizes:null,img:'cavat_nu.png',abbr:'CV'},
+
+  {id:'ao60_300',name:'Áo 60 năm ',cat:'60nam',price:300000,sizes:['S','M','L','XL','2XL','3XL'],img:'ao60_300.png',abbr:'60'},
+  {id:'ao60_thethao',name:'Áo 60 năm thể thao ',cat:'60nam',price:100000,sizes:['4','5','6','7','8','9'],img:'ao60_thethao.png',abbr:'TT'},
+  {id:'ao60_thun',name:'Áo 60 năm thun ',cat:'60nam',price:100000,sizes:['5','6','7','8','9','10'],img:'ao60_thun.png',abbr:'TH'},
+
+  {id:'khoac_du',name:'Áo khoác dù CTU (Đặt hàng) ',cat:'dongphuc',price:400000,sizes:['SX','S','M','L','XL','2XL','3XL','4XL'],img:'khoac_du.png',abbr:'CTU'},
+  {id:'ctu_khongtui_350',name:'Áo CTU không túi ',cat:'dongphuc',price:350000,sizes:['S','M','L','XL','2XL','3XL'],img:'ctu_khongtui_350.png',abbr:'CTU'},
+  {id:'ctu_cotui_350',name:'Áo CTU có túi ',cat:'dongphuc',price:350000,sizes:['S','M','L','XL','2XL','3XL'],img:'ctu_cotui_350.png',abbr:'CTU'},
+  {id:'ctu_khongtui_300',name:'Áo CTU không túi ',cat:'dongphuc',price:300000,sizes:['S','M','L','XL','2XL','3XL'],img:'ctu_khongtui_300.png',abbr:'CTU'},
+  {id:'ctu_cotui_300',name:'Áo CTU có túi ',cat:'dongphuc',price:300000,sizes:['S','M','L','XL','2XL','3XL'],img:'ctu_cotui_300.png',abbr:'CTU'},
+  {id:'doan_155',name:'Áo Đoàn thanh niên ',cat:'dongphuc',price:155000,sizes:['S','M','L','XL','2XL','3XL'],img:'doan_155.png',abbr:'ĐTN'},
+  {id:'doan_275',name:'Áo Đoàn thanh niên cao cấp',cat:'dongphuc',price:275000,sizes:['S','M','L','XL','2XL','3XL'],img:'doan_275.png',abbr:'ĐTN'},
+  {id:'ctu_99',name:'Áo đồng phục sinh viên CTU ',cat:'dongphuc',price:99000,sizes:['S','M','L','XL','2XL','3XL','4XL','5XL'],img:'ctu_99.png',abbr:'CTU',tag:'Giá tốt'},
+  {id:'ctu_75',name:'Áo đồng phục thể dục CTU ',cat:'dongphuc',price:75000,sizes:['2','3','4','5','6','7','8','9'],img:'ctu_75.png',abbr:'TE'},
+
+  {id:'mockhoa_ctu',name:'Móc khóa CTU',cat:'luuniem',price:15000,sizes:['Thoi','Gấu'],img:'mockhoa_ctu.png',abbr:'MK'},
+  {id:'tuivai_19',name:'Túi vải CTU ',cat:'luuniem',price:19000,sizes:null,img:'tuivai_19.png',abbr:'TV'},
+  {id:'day_35',name:'Dây đeo CTU ',cat:'luuniem',price:35000,sizes:null,img:'day_35.png',abbr:'DD'},
+  {id:'non_luoitrai',name:'Nón lưỡi trai CTU',cat:'luuniem',price:49000,sizes:null,img:'non_luoitrai.png',abbr:'NLT'},
+  {id:'non_baohiem',name:'Nón bảo hiểm CTU',cat:'luuniem',price:150000,sizes:['Đậm','Nhạt'],img:'non_baohiem.png',abbr:'NBH'},
+  {id:'balo_ctu',name:'Balo CTU',cat:'luuniem',price:350000,sizes:null,img:'balo_ctu.png',abbr:'BL'},
+  {id:'ly_su',name:'Ly sứ CTU',cat:'luuniem',price:100000,sizes:['Trắng','Xanh'],img:'ly_su.png',abbr:'LS'},
+  {id:'dongho',name:'Đồng hồ CTU',cat:'luuniem',price:250000,sizes:null,img:'dongho.png',abbr:'ĐH'},
+  {id:'binh_giunhiet',name:'Bình giữ nhiệt CTU',cat:'luuniem',price:250000,sizes:null,img:'binh_giunhiet.png',abbr:'BGN'},
+  {id:'ly_locknlock',name:'Ly giữ nhiệt LocknLock',cat:'luuniem',price:500000,sizes:null,img:'ly_locknlock.png',abbr:'LGN'},
+  {id:'ly_giunhiet279',name:'Ly giữ nhiệt CTU',cat:'luuniem',price:279000,sizes:null,img:'ly_giunhiet279.png',abbr:'LGN'},
+  {id:'gau_ctu',name:'Gấu bông CTU',cat:'luuniem',price:150000,sizes:null,img:'gau_ctu.png',abbr:'GB'},
+  {id:'du_ctu',name:'Dù CTU',cat:'luuniem',price:180000,sizes:null,img:'du_ctu.png',abbr:'DU'},
+  {id:'goi_ke',name:'Gối kê cổ',cat:'luuniem',price:120000,sizes:null,img:'goi_ke.png',abbr:'GK'},
+  {id:'st_ctu',name:'Sổ tay CTU',cat:'luuniem',price:250000,sizes:null,img:'st_ctu.png',abbr:'ST'},
+
+  {id:'cse_nam_dam',name:'Áo Kinh tế Nam — màu đậm',cat:'cse',price:299000,sizes:['S','M','L','XL','2XL','3XL'],img:'cse_nam_dam.png',abbr:'KT'},
+  {id:'cse_nu_dam',name:'Áo Kinh tế Nữ — màu đậm',cat:'cse',price:299000,sizes:['S','M','L','XL','2XL','3XL'],img:'cse_nu_dam.png',abbr:'KT'},
+  {id:'cse_nam_nhat',name:'Áo Kinh tế Nam — màu nhạt',cat:'cse',price:299000,sizes:['S','M','L','XL','2XL','3XL'],img:'cse_nam_nhat.png',abbr:'KT'},
+  {id:'cse_nu_nhat',name:'Áo Kinh tế Nữ — màu nhạt',cat:'cse',price:299000,sizes:['S','M','L','XL','2XL','3XL'],img:'cse_nu_nhat.png',abbr:'KT'},
+  {id:'cse_139',name:'Áo Kinh tế ',cat:'cse',price:139000,sizes:['XS','S','M','L','XL','2XL','3XL'],img:'cse_139.png',abbr:'KT'},
+  {id:'quan_cse',name:'Quần Kinh tế ',cat:'cse',price:100000,sizes:['7','8','9','10','11','12','13','14'],img:'quan_cse.png',abbr:'QK'},
+  {id:'non_cse',name:'Nón lưỡi trai Kinh tế',cat:'cse',price:49000,sizes:null,img:'non_cse.png',abbr:'NLT'},
+  {id:'non_baohiem_cse',name:'Nón bảo hiểm Kinh tế',cat:'cse',price:150000,sizes:['Đậm','Nhạt'],img:'non_baohiem_cse.png',abbr:'NBH'},
+  {id:'mockhoa_cse',name:'Móc khóa Kinh tế',cat:'cse',price:10000,sizes:null,img:'mockhoa_cse.png',abbr:'MK'},
+  {id:'binh_cse',name:'Bình giữ nhiệt Kinh tế',cat:'cse',price:250000,sizes:null,img:'binh_cse.png',abbr:'BGN'},
+  {id:'ly_cse',name:'Ly giữ nhiệt Kinh tế',cat:'cse',price:279000,sizes:null,img:'ly_cse.png',abbr:'LGN'},
+];
+
+const CATEGORIES = [
+  {id:'all',label:'Tất cả'},
+  {id:'somi',label:'Sơ mi & Blouse'},
+  {id:'dongphuc',label:'Đồng phục CTU'},
+  {id:'60nam',label:'Kỷ niệm 60 năm'},
+  {id:'cse',label:'Trường Kinh tế'},
+  {id:'luuniem',label:'Quà lưu niệm'},
+];
+const CAT_LABEL = Object.fromEntries(CATEGORIES.map(c=>[c.id,c.label]));
+
+let activeCat = 'all';
+let cart = [];
+const selectedSize = {};
+
+function fmt(n){return n.toLocaleString('vi-VN')+'đ';}
+
+function renderFilters(){
+  const bar = document.getElementById('filterBar');
+  bar.innerHTML = CATEGORIES.map(c=>`<button class="chip ${c.id===activeCat?'active':''}" onclick="setCat('${c.id}')">${c.label}</button>`).join('');
+}
+function setCat(id){activeCat=id;renderFilters();renderCatalog();}
+
+function cartQtyFor(prodId,size){
+  const line = cart.find(l=>l.id===prodId && l.size===size);
+  return line ? line.qty : 0;
+}
+
+function renderCatalog(){
+  const root = document.getElementById('catalog');
+  const cats = activeCat==='all' ? CATEGORIES.filter(c=>c.id!=='all').map(c=>c.id) : [activeCat];
+  root.innerHTML = cats.map(catId=>{
+    const items = PRODUCTS.filter(p=>p.cat===catId);
+    if(items.length===0) return '';
+    return `
+      <div class="section-head">
+        <h3>${CAT_LABEL[catId]}</h3>
+        <span class="count">${items.length} sản phẩm</span>
+      </div>
+      <div class="grid">${items.map(p=>productCard(p)).join('')}</div>
+    `;
+  }).join('');
+}
+
+const CAT_COLORS = {
+  somi:   {bg:'#dbeafe',fg:'#1e40af',ring:'#93c5fd'},
+  dongphuc:{bg:'#d6e8f8',fg:'#1f5ca9',ring:'#7eb8e8'},
+  '60nam':{bg:'#fef9c3',fg:'#854d0e',ring:'#fbbf24'},
+  luuniem:{bg:'#e0f2fe',fg:'#0369a1',ring:'#38bdf8'},
+  cse:    {bg:'#dcfce7',fg:'#166534',ring:'#86efac'},
+  all:    {bg:'#e0e7ef',fg:'#334155',ring:'#94a3b8'},
+};
+
+function productIcon(p, size=72){
+  const c = CAT_COLORS[p.cat] || CAT_COLORS.all;
+  const abbr = p.abbr || '?';
+  const fs = abbr.length <= 2 ? Math.round(size*0.32) : Math.round(size*0.24);
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <rect width="${size}" height="${size}" rx="${size*0.22}" fill="${c.bg}"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${size*0.35}" fill="none" stroke="${c.ring}" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="${size/2}" y="${size/2}" dominant-baseline="central" text-anchor="middle"
+      font-family="'Fraunces',serif" font-weight="700" font-size="${fs}" fill="${c.fg}" letter-spacing="-0.5">${abbr}</text>
+  </svg>`;
+}
+
+function productIconSmall(p){
+  const c = CAT_COLORS[p.cat] || CAT_COLORS.all;
+  const abbr = p.abbr || '?';
+  const fs = abbr.length <= 2 ? 13 : 10;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <rect width="40" height="40" rx="9" fill="${c.bg}"/>
+    <text x="20" y="20" dominant-baseline="central" text-anchor="middle"
+      font-family="'Fraunces',serif" font-weight="700" font-size="${fs}" fill="${c.fg}">${abbr}</text>
+  </svg>`;
+}
+
+function productCard(p){
+  const sel = selectedSize[p.id] || (p.sizes ? null : 'Tiêu chuẩn');
+  const qty = sel ? cartQtyFor(p.id, sel) : 0;
+  const sizesHtml = p.sizes ? `
+    <div class="size-row">
+      ${p.sizes.map(s=>`<button class="size-pill ${sel===s?'selected':''}" onclick="pickSize('${p.id}','${s}')">${s}</button>`).join('')}
+    </div>` : '';
+
+  let actionHtml;
+  if(p.sizes && !sel){
+    actionHtml = `<button class="add-btn" disabled>Chọn size</button>`;
+  } else if(qty>0){
+    actionHtml = `
+      <div class="qty-row">
+        <div class="qty-control">
+          <button onclick="changeQty('${p.id}','${sel}',-1)">−</button>
+          <span>${qty}</span>
+          <button onclick="changeQty('${p.id}','${sel}',1)">+</button>
+        </div>
+        <span style="font-size:12px;color:var(--muted);">trong giỏ</span>
+      </div>`;
+  } else {
+    actionHtml = `<button class="add-btn" onclick="addToCart('${p.id}')">Thêm vào giỏ</button>`;
+  }
+
+  return `
+    <div class="product-card">
+      <div class="product-media">
+        ${p.tag?`<span class="tag">${p.tag}</span>`:''}
+        <img src="${p.img}" alt="${p.name}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="img-fallback" style="display:none;">${productIcon(p)}</div>
+      </div>
+      <div class="product-body">
+        <p class="product-name">${p.name}</p>
+        <div class="product-price">${fmt(p.price)}</div>
+        ${sizesHtml}
+        ${actionHtml}
+      </div>
+    </div>
+  `;
+}
+
+function pickSize(prodId, size){
+  selectedSize[prodId] = size;
+  renderCatalog();
+}
+
+function addToCart(prodId){
+  const p = PRODUCTS.find(x=>x.id===prodId);
+  const size = selectedSize[prodId] || 'Tiêu chuẩn';
+  const existing = cart.find(l=>l.id===prodId && l.size===size);
+  if(existing){existing.qty+=1;}
+  else{cart.push({id:p.id,name:p.name,size,price:p.price,qty:1});}
+  renderCatalog();
+  renderCart();
+  showToast(`Đã thêm "${p.name}" vào giỏ`);
+}
+
+function changeQty(prodId, size, delta){
+  const line = cart.find(l=>l.id===prodId && l.size===size);
+  if(!line) return;
+  line.qty += delta;
+  if(line.qty<=0){
+    cart = cart.filter(l=>l!==line);
+  }
+  renderCatalog();
+  renderCart();
+}
+
+function removeLine(prodId,size){
+  cart = cart.filter(l=>!(l.id===prodId && l.size===size));
+  renderCatalog();
+  renderCart();
+}
+
+function cartTotals(){
+  const qty = cart.reduce((s,l)=>s+l.qty,0);
+  const total = cart.reduce((s,l)=>s+l.qty*l.price,0);
+  return {qty,total};
+}
+
+function renderCart(){
+  const body = document.getElementById('drawerBody');
+  const {qty,total} = cartTotals();
+  document.getElementById('cartCount').textContent = qty;
+  document.getElementById('footQty').textContent = qty+' sản phẩm';
+  document.getElementById('footTotal').textContent = fmt(total);
+  document.getElementById('checkoutBtn').disabled = qty===0;
+
+  if(cart.length===0){
+    body.innerHTML = `<div class="drawer-empty"><div class="ic">🛍</div><p>Giỏ hàng đang trống.<br>Hãy chọn vài món từ cửa hàng nhé.</p></div>`;
+    return;
+  }
+  body.innerHTML = cart.map(l=>{
+    const p = PRODUCTS.find(x=>x.id===l.id);
+    return `
+      <div class="cart-line">
+        <div class="cart-line-media">${p && p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : (p?productIconSmall(p):'🛍')}</div>
+        <div class="cart-line-info">
+          <p class="cart-line-name">${l.name}</p>
+          <p class="cart-line-meta">${l.size} · SL ${l.qty}</p>
+        </div>
+        <div class="cart-line-right">
+          <span class="cart-line-price">${fmt(l.price*l.qty)}</span>
+          <button class="remove-link" onclick="removeLine('${l.id}','${l.size}')">Xóa</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+function openCheckout(){
+  const {qty,total} = cartTotals();
+  const modal = document.getElementById('modalContent');
+  modal.innerHTML = `
+    <h3>Hoàn tất đặt hàng</h3>
+    <p class="sub">Điền thông tin để cửa hàng liên hệ giao hàng</p>
+    <div class="field">
+      <label>Họ và tên người nhận</label>
+      <input type="text" id="ckName" placeholder="Nguyễn Văn A">
+    </div>
+    <div class="field">
+      <label>Số điện thoại</label>
+      <input type="tel" id="ckPhone" placeholder="09xx xxx xxx">
+    </div>
+    <div class="field">
+      <label>Bạn thuộc đối tượng nào?</label>
+      <select id="ckType">
+        <option>Sinh viên CTU</option>
+        <option>Cựu sinh viên / Cán bộ</option>
+        <option>Khách ngoài trường</option>
+      </select>
+    </div>
+    <div class="modal-summary">
+      ${cart.map(l=>`<div class="row"><span>${l.name} (${l.size}) ×${l.qty}</span><span>${fmt(l.price*l.qty)}</span></div>`).join('')}
+      <div class="row total"><span>Tổng cộng — ${qty} sản phẩm</span><span>${fmt(total)}</span></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeCheckout()">Quay lại</button>
+      <button class="btn-primary" id="submitOrderBtn" onclick="submitOrder()">Xác nhận đặt hàng</button>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeCheckout(){document.getElementById('modalOverlay').classList.remove('open');}
+
+async function submitOrder(){
+  const name = document.getElementById('ckName').value.trim();
+  const phone = document.getElementById('ckPhone').value.trim();
+  const customerType = document.getElementById('ckType').value;
+
+  if(!name || !phone){
+    showToast('Vui lòng điền đầy đủ họ tên và số điện thoại');
+    return;
+  }
+  if(!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('DÁN_URL')){
+    showToast('⚠ Chưa cấu hình APPS_SCRIPT_URL trong file — xem hướng dẫn deploy');
+    return;
+  }
+
+  const btn = document.getElementById('submitOrderBtn');
+  btn.disabled = true;
+  btn.textContent = 'Đang gửi...';
+
+  const now = new Date();
+  const timestamp = `${now.getDate().toString().padStart(2,'0')}/${(now.getMonth()+1).toString().padStart(2,'0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
+  const payload = {timestamp,name,phone,customerType,items:cart.map(l=>({name:l.name,size:l.size,price:l.price,qty:l.qty}))};
+
+  try{
+    await fetch(APPS_SCRIPT_URL,{
+      method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(payload)
+    });
+    showSuccess(name);
+    cart = [];
+    renderCart();
+    renderCatalog();
+  }catch(err){
+    showToast('Lỗi gửi đơn hàng: '+err.message);
+    btn.disabled = false;
+    btn.textContent = 'Xác nhận đặt hàng';
+  }
+}
+
+function showSuccess(name){
+  const code = 'DH'+Date.now().toString().slice(-6);
+  const modal = document.getElementById('modalContent');
+  modal.innerHTML = `
+    <div class="success-seal">✓</div>
+    <h3 style="text-align:center;">Đặt hàng thành công</h3>
+    <p class="sub" style="text-align:center;">Cảm ơn ${name}, cửa hàng sẽ liên hệ xác nhận sớm.</p>
+    <p class="order-code">#${code}</p>
+    <p style="text-align:center;font-size:12.5px;color:var(--muted);margin-bottom:20px;">Mã đơn hàng tham khảo của bạn</p>
+    <div class="modal-actions">
+      <button class="btn-primary" style="flex:1;" onclick="closeCheckout();closeDrawer();">Tiếp tục mua sắm</button>
+    </div>
+  `;
+}
+
+document.getElementById('modalOverlay').addEventListener('click',e=>{
+  if(e.target.id==='modalOverlay') closeCheckout();
+});
+
+renderFilters();
+renderCatalog();
+renderCart();
+</script>
+</body>
+</html>
